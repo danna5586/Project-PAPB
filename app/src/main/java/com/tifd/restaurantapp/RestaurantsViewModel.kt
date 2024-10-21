@@ -73,8 +73,7 @@ class RestaurantsViewModel(
             state.value = restaurants.restoreSelections()
         }
     }
-    private suspend fun getRemoteRestaurants():
-            List<Restaurant> {
+    private suspend fun getRemoteRestaurants(): List<Restaurant> {
         return withContext(Dispatchers.IO) {
             restInterface.getRestaurants()
         }
