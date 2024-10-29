@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -50,26 +51,52 @@ android {
 }
 
 dependencies {
+    // Core KTX and AppCompat
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+
+    // Material 3 and Compose libraries
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.material)
+
+    // Compose BOM to manage consistent Compose versions
     implementation(platform(libs.androidx.compose.bom))
+
+    // UI and tooling dependencies
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    implementation(libs.androidx.compose.material)
+
+    // Lifecycle and ViewModel Compose
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.lifecycle.viewmodel.compose)
+
+    // Activity Compose
+    implementation(libs.androidx.activity.compose)
+
+    // Retrofit and Gson for API calls and JSON parsing
+    implementation(libs.retrofit)
+    implementation(libs.gson)
+    implementation(libs.retrofit.converter.gson)
+    implementation(libs.androidx.navigation.compose)
+
+    // Room dependencies
+    implementation("androidx.room:room-runtime:2.6.1") // Room runtime
+    implementation("androidx.room:room-ktx:2.6.1") // Room Kotlin extensions
+    kapt("androidx.room:room-compiler:2.6.1") // Room annotation processor
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
+    // Debug dependencies
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation ("com.google.code.gson:gson:2.8.6")
-    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation ("androidx.navigation:navigation-compose:2.4.2")
 
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
 }
